@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Pdfium",
-    platforms: [ .iOS(.v11) ],
+    platforms: [ .iOS(.v14) ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -23,6 +23,6 @@ let package = Package(
         .binaryTarget(
             name: "Pdfium",
             url: "https://github.com/TechTeamer/ios-xc-pdfium/raw/master/Pdfium/1.0.0/Pdfium.xcframework.zip",
-            checksum: "d72903096534bfbf10034c9a06796e85abdba33648f4065ca97b2d68e07fd0ff")
+            checksum: "4694cdd2c9ba458dc76ce4ee2748d26974a08d7f15d7cd368d723e143346d5ba")
     ]
 )

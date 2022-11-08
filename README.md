@@ -4,13 +4,16 @@
 ![CocoaPods compatible](https://img.shields.io/badge/CocoaPods-compatible-green.svg)
 ![SPM compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-green.svg)<br/>
 ![Catalyst compatible](https://img.shields.io/badge/Catalyst-incompatible-red.svg)
-[![Carthage incompatible](https://img.shields.io/badge/Carthage-incompatible-red.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 
 ## Release
 
 ### 1.0.0
-Build date: 2022-10-20 17:09
+Build date: 2022-11-09 00:03
+
+
+## Minimum runtime requirements
+iOS 14+
 
 
 ## Installation

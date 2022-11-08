@@ -28,6 +28,7 @@ mkdir -p "$BUILD"
       then
         echo 'target_environment = "simulator"'
       fi
+      echo 'ios_deployment_target = "12.0"'
       ;;
     mac)
       echo 'mac_deployment_target = "10.13.0"'
