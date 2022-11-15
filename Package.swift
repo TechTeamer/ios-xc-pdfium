@@ -22,7 +22,7 @@ let package = Package(
         
         .binaryTarget(
             name: "Pdfium",
-            url: "https://github.com/TechTeamer/ios-xc-pdfium/raw/master/Pdfium/1.0.0/Pdfium.xcframework.zip",
+            url: "https://github.com/TechTeamer/ios-xc-pdfium/raw/1.0.0/Pdfium/1.0.0/Pdfium.xcframework.zip",
             checksum: "4694cdd2c9ba458dc76ce4ee2748d26974a08d7f15d7cd368d723e143346d5ba")
     ]
 )
