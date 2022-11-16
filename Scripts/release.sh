@@ -27,16 +27,18 @@ function copyFiles {
     rm -rf $releasePath
     mkdir $releasePath
     
+    rm -rf "${rootPath}/Pdfium/Pdfium.xcframework.zip"
+    
     cd $workPath/out
     zip -r "Pdfium.xcframework.zip" "Pdfium.xcframework"
-    mv Pdfium.xcframework.zip ${releasePath}
+    mv Pdfium.xcframework.zip "${rootPath}/Pdfium"
     
     releaseDate=$(date '+%Y-%m-%d %H:%M')
     releaseDescription="### $version\nBuild date: $releaseDate"
     sed -i "" "s/## Release/## Release\n\n$releaseDescription/" $rootPath/README.md
     
-    sourceURL="https://github.com/TechTeamer/ios-xc-pdfium/raw/${version}/Pdfium/${version}/Pdfium.xcframework.zip"
-    sourceChecksum=$(swift package compute-checksum "${releasePath}/Pdfium.xcframework.zip")
+    sourceURL="https://github.com/TechTeamer/ios-xc-pdfium/raw/${version}/Pdfium/Pdfium.xcframework.zip"
+    sourceChecksum=$(swift package compute-checksum "${rootPath}/Pdfium/Pdfium.xcframework.zip")
     sed "s|X.Y.Z|${version}|g; s|SOURCE_URL|${sourceURL}|g" <$scriptPath/templates/Pdfium.zip.podspec >$releasePath/Pdfium.podspec
     sed "s|SOURCE_CHECKSUM|${sourceChecksum}|g; s|SOURCE_URL|${sourceURL}|g" <$scriptPath/templates/Package.zip.swift >$rootPath/Package.swift
 }
