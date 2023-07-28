@@ -9,7 +9,8 @@ function setup {
     workPath=$scriptPath/tmp
     buildPath=$workPath/builder
     #rm -rf $workPath
-    #mkdir $workPath
+    mkdir "$workPath"
+    mkdir "$buildPath"
     cp -r $scriptPath/builder $workPath
     echo "RootPath: $rootPath"
     echo "ScriptPath: $scriptPath"
@@ -40,7 +41,7 @@ function buildPdfium {
     # Build Arm64 Simulator
     ./build.sh iossimulator arm64
     cp $buildPath/staging/lib/libpdfium.dylib $buildPath/build/libpdfium-arm64-simulator.dylib
-    
+
     # Build X64 Simulator
     ./build.sh iossimulator x64
     cp $buildPath/staging/lib/libpdfium.dylib $buildPath/build/libpdfium-x64-simulator.dylib
@@ -80,9 +81,13 @@ function makeXCFramework {
 }
 
 function run {
+    echo "########################################################################### BUILD.SETUP ####################"
     setup
+    echo "##################################################################### BUILD.buildPdfium ####################"
     buildPdfium
+    echo "############################################################ BUILD.mergeSimulatorBuilds ####################"
     mergeSimulatorBuilds
+    echo "################################################################# BUILD.makeXCFramework ####################"
     makeXCFramework
 }
 

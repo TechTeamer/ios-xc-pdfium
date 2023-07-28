@@ -4,8 +4,8 @@ OS=${PDFium_TARGET_OS:?}
 CPU="${PDFium_TARGET_CPU:?}"
 TARGET_LIBC="${PDFium_TARGET_LIBC:-default}"
 SOURCE_DIR="$PWD/example"
-ANDROID_TOOLCHAIN="${PDFium_SOURCE_DIR:?}/third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/"
 CMAKE_ARGS=()
+CAN_RUN_ON_HOST=false
 
 export PDFium_DIR="$PWD/staging"
 
@@ -13,7 +13,7 @@ case "$OS" in
   android)
     case "$CPU" in
       arm)
-        PREFIX="armv7a-linux-androideabi16-"
+        PREFIX="armv7a-linux-androideabi19-"
         ;;
       arm64)
         PREFIX="aarch64-linux-android21-"
@@ -22,10 +22,9 @@ case "$OS" in
         PREFIX="x86_64-linux-android21-"
         ;;
       x86)
-        PREFIX="i686-linux-android16-"
+        PREFIX="i686-linux-android19-"
         ;;
     esac
-    export PATH="$ANDROID_TOOLCHAIN:$PATH"
     CMAKE_ARGS+=(
       -D CMAKE_C_COMPILER="${PREFIX:-}clang"
       -D CMAKE_CXX_COMPILER="${PREFIX:-}clang++"
@@ -65,14 +64,22 @@ case "$OS" in
         SUFFIX="-9"
         ;;
       x86)
-        [ "$TARGET_LIBC" == "musl" ] && PREFIX="i686-linux-musl-"
+        if [ "$TARGET_LIBC" == "musl" ]; then
+          PREFIX="i686-linux-musl-"
+        else
+          CAN_RUN_ON_HOST=true
+        fi
         CMAKE_ARGS+=(
           -D CMAKE_CXX_FLAGS="-m32"
           -D CMAKE_C_FLAGS="-m32"
         )
         ;;
       x64)
-        [ "$TARGET_LIBC" == "musl" ] && PREFIX="x86_64-linux-musl-"
+        if [ "$TARGET_LIBC" == "musl" ]; then
+          PREFIX="x86_64-linux-musl-"
+        else
+          CAN_RUN_ON_HOST=true
+        fi
         ;;
     esac
     CMAKE_ARGS+=(
@@ -88,6 +95,7 @@ case "$OS" in
         ;;
       x64)
         ARCH="x86_64"
+        CAN_RUN_ON_HOST=true
         ;;
     esac
     CMAKE_ARGS+=(
@@ -102,9 +110,11 @@ case "$OS" in
         ;;
       x86)
         ARCH="Win32"
+        CAN_RUN_ON_HOST=true
         ;;
       x64)
         ARCH="x64"
+        CAN_RUN_ON_HOST=true
         ;;
     esac
     CMAKE_ARGS+=(
@@ -128,9 +138,15 @@ cmake "${CMAKE_ARGS[@]}"
 cmake --build .
 
 if [ "$OS" == "win" ]; then
-  file Debug/example.exe
+  EXAMPLE="Debug/example.exe"
 else
-  file example
+  EXAMPLE="./example"
+fi
+
+file $EXAMPLE
+
+if [ $CAN_RUN_ON_HOST == "true" ]; then
+  $EXAMPLE "${PDFium_SOURCE_DIR}/testing/resources/hello_world.pdf" hello_world.ppm
 fi
 
 popd
