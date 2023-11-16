@@ -6,3 +6,4 @@
 //
 
 #import <Pdfium/fpdfview.h>
+#import <Pdfium/fpdf_formfill.h>

@@ -1,5 +1,5 @@
 framework module Pdfium {
-  umbrella header "fpdfview.h"
+  umbrella header "pdfium.h"
 
   export *
   module * { export * }
