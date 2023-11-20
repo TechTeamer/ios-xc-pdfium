@@ -48,6 +48,7 @@ function buildPdfium {
     
     # Copy headers
     cp $buildPath/staging/include/fpdfview.h $buildPath/build/fpdfview.h
+    cp $buildPath/staging/include/fpdf_formfill.h $buildPath/build/fpdf_formfill.h
 }
 
 
@@ -66,6 +67,8 @@ function makeXCFramework {
     cp -r "$scriptPath/templates/Pdfium.xcframework" "$workPath/out/Pdfium.xcframework"
     
     cp "$buildPath/build/fpdfview.h" "$workPath/out/Pdfium.xcframework/ios-arm64/Pdfium.framework/Headers/fpdfview.h"
+    cp "$buildPath/build/fpdf_formfill.h" "$workPath/out/Pdfium.xcframework/ios-arm64/Pdfium.framework/Headers/fpdf_formfill.h"
+    
     cp "$buildPath/build/libpdfium-arm64.dylib" "$workPath/out/Pdfium.xcframework/ios-arm64/Pdfium.framework/Pdfium"
     otool -L "$workPath/out/Pdfium.xcframework/ios-arm64/Pdfium.framework/Pdfium"
     echo "Patching ios-arm64"
@@ -73,6 +76,8 @@ function makeXCFramework {
     otool -L "$workPath/out/Pdfium.xcframework/ios-arm64/Pdfium.framework/Pdfium"
     
     cp "$buildPath/build/fpdfview.h" "$workPath/out/Pdfium.xcframework/ios-arm64_x86_64-simulator/Pdfium.framework/Headers/fpdfview.h"
+    cp "$buildPath/build/fpdf_formfill.h" "$workPath/out/Pdfium.xcframework/ios-arm64_x86_64-simulator/Pdfium.framework/Headers/fpdf_formfill.h"
+    
     cp "$buildPath/build/libpdfium-arm64_x64-simulator.dylib" "$workPath/out/Pdfium.xcframework/ios-arm64_x86_64-simulator/Pdfium.framework/Pdfium"
     otool -L "$workPath/out/Pdfium.xcframework/ios-arm64_x86_64-simulator/Pdfium.framework/Pdfium"
     echo "Patching ios-arm64_x64 simulator"
