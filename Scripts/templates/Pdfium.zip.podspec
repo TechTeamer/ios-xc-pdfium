@@ -9,9 +9,9 @@ s.license           = { :type => 'MIT', :file => 'LICENSE' }
 
 s.source            = { :http => 'SOURCE_URL' }
 
-s.swift_version = '5.2'
+s.swift_version = '5.5'
 s.platforms = { :ios => "15.0" }
-s.pod_target_xcconfig = { "SWIFT_VERSION" => "5.2" }
+s.pod_target_xcconfig = { "SWIFT_VERSION" => "5.5" }
 
 s.info_plist = {
     'CFBundleIdentifier' => 'com.facekom.Pdfium'

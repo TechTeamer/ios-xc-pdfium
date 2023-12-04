@@ -16,7 +16,7 @@ Build date: 2022-11-09 00:03
 
 
 ## Minimum runtime requirements
-iOS 14+
+iOS 15+
 
 
 ## Installation
