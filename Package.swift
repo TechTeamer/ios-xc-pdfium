@@ -1,11 +1,11 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "Pdfium",
-    platforms: [ .iOS(.v14) ],
+    platforms: [ .iOS(.v15) ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -22,7 +22,7 @@ let package = Package(
         
         .binaryTarget(
             name: "Pdfium",
-            url: "https://github.com/TechTeamer/ios-xc-pdfium/raw/1.2.0/Pdfium/Pdfium.xcframework.zip",
-            checksum: "f50d58eb4a1a6fcab189292c51a19ac8c1eaec66cb63c7c02ded90baeedc33e5")
+            url: "https://github.com/TechTeamer/ios-xc-pdfium/raw/1.3.0/Pdfium/Pdfium.xcframework.zip",
+            checksum: "20b824ab4ad336e28f51ea4bde78496c61e98d1e7724742e30f0670da6a7074b")
     ]
 )
