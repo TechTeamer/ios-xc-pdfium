@@ -14,6 +14,7 @@ mkdir -p "$BUILD"
 (
   echo "is_debug = $IS_DEBUG"
   echo "pdf_is_standalone = true"
+  echo "pdf_use_partition_alloc = false"
   echo "target_cpu = \"$TARGET_CPU\""
   echo "target_os = \"$OS\""
   echo "pdf_enable_v8 = $ENABLE_V8"
@@ -27,6 +28,9 @@ mkdir -p "$BUILD"
   fi
 
   case "$OS" in
+    android)
+      echo "clang_use_chrome_plugins = false"
+      ;;
     ios)
       echo "ios_enable_code_signing = false"
 #      if [ "${PDFium_TARGET_OS_SIMULATOR}" == "simulator" ]
@@ -35,17 +39,19 @@ mkdir -p "$BUILD"
 #      fi
       echo "use_blink = true"
       [ "$ENABLE_V8" == "true" ] && [ "$TARGET_CPU" == "arm64" ] && echo 'arm_control_flow_integrity = "none"'
+      echo "clang_use_chrome_plugins = false"
       ;;
     linux)
       echo 'use_allocator_shim = false'
+      echo "clang_use_chrome_plugins = false"
       ;;
     mac)
       echo 'use_allocator_shim = false'
       echo 'mac_deployment_target = "10.13.0"'
+      echo "clang_use_chrome_plugins = false"
       ;;
     wasm)
       echo 'pdf_is_complete_lib = true'
-      echo 'pdf_use_partition_alloc = false'
       echo 'is_clang = false'
       ;;
   esac
